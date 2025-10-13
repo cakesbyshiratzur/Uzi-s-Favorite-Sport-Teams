@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+Sitemap: https://uzi-sport-on-tv.vercel.app/sitemap.xml
+
