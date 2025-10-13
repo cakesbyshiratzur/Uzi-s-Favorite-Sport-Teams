@@ -6,8 +6,7 @@ import Link from "next/link";
 const navLinks = [
   { href: "#hero", label: "Home" },
   { href: "#favorite-teams", label: "Teams" },
-  { href: "#schedules", label: "Schedules" },
-  { href: "#highlights", label: "Highlights" },
+  { href: "#players", label: "Players" },
 ];
 
 export default function Navigation() {
