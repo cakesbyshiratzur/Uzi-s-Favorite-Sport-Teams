@@ -1,2 +1,0 @@
-Please publish the local website: http://localhost:3000/ to GitHub.
-The GitHub owner is cakesbyshiratzur. the production repository named "Uzi-s-Favorite-Sport-Teams" exists. Please publish the website to GitHub. use the github mcp.

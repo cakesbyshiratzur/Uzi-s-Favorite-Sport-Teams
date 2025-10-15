@@ -43,6 +43,14 @@ const soccerTeams = [
     standingsLink: "https://www.google.com/search?q=La+Liga+standings",
     highlightsLink: "https://www.youtube.com/results?search_query=La+Liga+highlights",
   },
+  {
+    name: "UEFA Champions League",
+    country: "Europe",
+    logo: "/UEFA Champions League.jpg",
+    link: "https://www.espn.com/soccer/scoreboard?league=uefa.champions",
+    standingsLink: "https://www.google.com/search?q=upcoming%20man%20champions%20league%20schedule%20&source=sh/x/gs/m2/5#sie=lg;/g/11lcj4vhs3;2;/m/0c1q0;st;fp;1;;;",
+    highlightsLink: "https://www.youtube.com/results?search_query=chamption+leage+highlights+videos&sp=EgQIBBAB",
+  },
 ];
 
 export default function SoccerTeams() {

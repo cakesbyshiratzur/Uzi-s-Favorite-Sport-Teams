@@ -1,0 +1,8 @@
+At line:1 char:84
++ ... le]::ReadAllBytes('public\logo.jpg');  = [Convert]::ToBase64String();
++                                                                        ~
+An expression was expected after '('.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordEx 
+   ception
+    + FullyQualifiedErrorId : ExpectedExpression
+ 
