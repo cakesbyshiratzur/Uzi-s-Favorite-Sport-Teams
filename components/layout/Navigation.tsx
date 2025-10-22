@@ -7,6 +7,7 @@ const navLinks = [
   { href: "#hero", label: "Home" },
   { href: "#favorite-teams", label: "Teams" },
   { href: "#players", label: "Players" },
+  { href: "#connect", label: "Connect" },
 ];
 
 export default function Navigation() {

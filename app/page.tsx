@@ -3,6 +3,7 @@ import SoccerTeams from "@/components/sections/SoccerTeams";
 import FootballTeams from "@/components/sections/FootballTeams";
 import BasketballTeams from "@/components/sections/BasketballTeams";
 import Players from "@/components/sections/Players";
+import ConnectWithMe from "@/components/sections/ConnectWithMe";
 
 export default function Home() {
   return (
@@ -19,6 +20,9 @@ export default function Home() {
 
       {/* Favorite Players Section */}
       <Players />
+
+      {/* Connect With Me Section */}
+      <ConnectWithMe />
     </>
   );
 }
