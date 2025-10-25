@@ -8,7 +8,15 @@ const footballTeams = [
     link: "https://www.thesportsdb.com/team/134934-dallas-cowboys",
     standingsLink: "https://www.google.com/search?q=Dallas+Cowboys+NFL+standings",
     highlightsLink: "https://www.google.com/search?q=Dallas+Cowboys+last+week+match+highlights",
-    image: "/Dallas Cowboys.jpeg",
+    image: "/Dallas Cowboys.PNG",
+  },
+  { 
+    name: "NFL", 
+    conference: "National Football League",
+    link: "https://www.thesportsdb.com/league/4391-nfl",
+    standingsLink: "https://www.nfl.com/standings/",
+    highlightsLink: "https://www.google.com/search?q=nfl+games+highlights+today&rlz=1C1RXQR_enUS1126US1126&oq=nfl+games+hi&gs_lcrp=EgZjaHJvbWUqDAgBEAAYFBiHAhiABDIRCAAQABgUGEYY_QEYhwIYgAQyDAgBEAAYFBiHAhiABDIGCAIQRRg5MgcIAxAAGIAEMgcIBBAAGIAEMgwIBRAAGAoYsQMYgAQyDwgGEAAYChiDARixAxiABDIPCAcQABgKGIMBGLEDGIAEMgkICBAAGAoYgAQyCQgJEAAYChiABNIBCTExNDY0ajBqN6gCCLACAfEFis0BU8C7bI0&sourceid=chrome&ie=UTF-8#sie=lg;/g/11lyp42zk1;6;/m/059yj;mt;fp;1;;;",
+    image: "/NFL.png",
   },
 ];
 
@@ -21,7 +29,7 @@ export default function FootballTeams() {
       bgColor="white"
       className="scroll-mt-20"
     >
-      <div className="max-w-md mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {footballTeams.map((team) => (
           <TeamCard
             key={team.name}
