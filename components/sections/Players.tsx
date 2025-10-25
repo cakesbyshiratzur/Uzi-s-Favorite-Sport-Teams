@@ -9,6 +9,7 @@ const players = [
     number: "8",
     country: "Israel",
     profileLink: "https://www.nba.com/player/1630166/deni-avdija",
+    highlightsLink: "https://www.nba.com/player/1630166/deni-avdija/videos",
     stats: [
       { label: "PPG", value: "16.9" },
       { label: "RPG", value: "7.3" },
@@ -22,6 +23,12 @@ const players = [
     number: "77",
     country: "Israel",
     profileLink: "https://www.nba.com/player/1642879/ben-saraf",
+    highlightsLink: "https://www.nba.com/player/1642879/ben-saraf/videos",
+    stats: [
+      { label: "PPG", value: "12.0" },
+      { label: "RPG", value: "3.0" },
+      { label: "APG", value: "4.0" },
+    ],
   },
   {
     name: "Danny Wolf",
@@ -30,6 +37,12 @@ const players = [
     number: "2",
     country: "USA",
     profileLink: "https://www.nba.com/player/1642874/danny-wolf",
+    highlightsLink: "https://www.nba.com/player/1642874/danny-wolf/videos",
+    stats: [
+      { label: "PPG", value: "14.2" },
+      { label: "RPG", value: "8.7" },
+      { label: "APG", value: "1.5" },
+    ],
   },
 ];
 
@@ -52,6 +65,7 @@ export default function Players() {
             number={player.number}
             country={player.country}
             profileLink={player.profileLink}
+            highlightsLink={player.highlightsLink}
             stats={player.stats}
           />
         ))}

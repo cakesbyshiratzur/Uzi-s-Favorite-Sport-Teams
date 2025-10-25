@@ -8,6 +8,7 @@ interface PlayerCardProps {
   number?: string;
   country?: string;
   profileLink: string;
+  highlightsLink?: string;
   image?: string;
   stats?: {
     label: string;
@@ -22,6 +23,7 @@ export default function PlayerCard({
   number,
   country,
   profileLink,
+  highlightsLink,
   image,
   stats,
 }: PlayerCardProps) {
@@ -37,6 +39,28 @@ export default function PlayerCard({
         strokeLinejoin="round"
         strokeWidth={2}
         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+      />
+    </svg>
+  );
+
+  const highlightsIcon = (
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       />
     </svg>
   );
@@ -85,13 +109,25 @@ export default function PlayerCard({
           </div>
         )}
 
-        <ExternalLink
-          href={profileLink}
-          className="flex items-center justify-center gap-2 text-sky-600 hover:text-sky-700 font-medium py-2 px-4 bg-sky-50 hover:bg-sky-100 rounded-md transition-colors w-full"
-        >
-          {profileIcon}
-          <span className="text-sm">View NBA Profile</span>
-        </ExternalLink>
+        <div className={`${highlightsLink ? 'grid grid-cols-2 gap-2' : ''}`}>
+          <ExternalLink
+            href={profileLink}
+            className={`flex items-center justify-center gap-2 text-sky-600 hover:text-sky-700 font-medium py-2 px-4 bg-sky-50 hover:bg-sky-100 rounded-md transition-colors ${highlightsLink ? '' : 'w-full'}`}
+          >
+            {profileIcon}
+            <span className="text-sm">Profile</span>
+          </ExternalLink>
+          
+          {highlightsLink && (
+            <ExternalLink
+              href={highlightsLink}
+              className="flex items-center justify-center gap-2 text-yellow-600 hover:text-yellow-700 font-medium py-2 px-4 bg-yellow-50 hover:bg-yellow-100 rounded-md transition-colors"
+            >
+              {highlightsIcon}
+              <span className="text-sm">Highlights</span>
+            </ExternalLink>
+          )}
+        </div>
       </div>
     </div>
   );
