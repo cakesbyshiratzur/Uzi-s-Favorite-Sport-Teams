@@ -8,7 +8,7 @@ const footballTeams = [
     link: "https://www.thesportsdb.com/team/134934-dallas-cowboys",
     standingsLink: "https://www.google.com/search?q=Dallas+Cowboys+NFL+standings",
     highlightsLink: "https://www.google.com/search?q=Dallas+Cowboys+last+week+match+highlights",
-    image: "/Dallas Cowboys.PNG",
+    image: "/Dallas Cowboys.png",
   },
   { 
     name: "Texas Longhorns", 
