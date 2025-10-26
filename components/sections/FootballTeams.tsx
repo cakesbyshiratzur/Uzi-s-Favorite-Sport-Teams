@@ -11,6 +11,14 @@ const footballTeams = [
     image: "/Dallas Cowboys.PNG",
   },
   { 
+    name: "Texas Longhorns", 
+    conference: "SEC Conference",
+    link: "https://www.espn.com/college-football/team/schedule/_/id/251",
+    standingsLink: "https://www.espn.com/college-football/standings/_/group/8/view/fbs",
+    highlightsLink: "https://www.google.com/search?q=ut+austin+football&sca_esv=30cc307e8b6ba113&rlz=1CDGOYI_enUS1127US1127&hl=en-US&sxsrf=AE3TifOnd7qKfBXl-vdW-mKuZNpBtl5wHQ%3A1761427861337&ei=lUH9aOmpFJC1qtsPvcHJ-Q8&oq=&gs_lp=EhNtb2JpbGUtZ3dzLXdpei1zZXJwIgAqAggAMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMgcQIxgnGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMhAQIxjwBRiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMgcQIxgnGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMgcQIxgnGOoCMgcQIxgnGOoCMgcQIxgnGOoCMg0QIxiABBgnGIoFGOoCMg0QIxiABBgnGIoFGOoCMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQLhgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQLhgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBMhAQABgDGLQCGOoCGI8B2AEBSII5UABYAHAEeAGQAQCYAQCgAQCqAQC4AQHIAQD4AQGYAgSgAi-oAi3CAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICHBAuGIAEGLADGEMYxwEYyAMYigUYjgUYrwHYAQHCAhMQLhiABBiwAxhDGMgDGIoF2AEBmAMO8QW5CtXFPNBQ8YgGAZAGELoGBAgBGAiSBwE0oAcAsgcAuAcAwgcFMi0yLjLIByk&sclient=mobile-gws-wiz-serp#sie=t;/m/0118b5s5;6;/m/012hfxch;mt;fp;1;;;",
+    image: "/texas-longhorns.jpg",
+  },
+  { 
     name: "NFL", 
     conference: "National Football League",
     link: "https://www.thesportsdb.com/league/4391-nfl",
@@ -25,7 +33,7 @@ export default function FootballTeams() {
     <Section
       id="football-teams"
       title="Favorite Football Teams"
-      subtitle="Track schedules, standings, and highlights for your favorite NFL teams"
+      subtitle="Track schedules, standings, and highlights for your favorite NFL and college football teams"
       bgColor="white"
       className="scroll-mt-20"
     >
