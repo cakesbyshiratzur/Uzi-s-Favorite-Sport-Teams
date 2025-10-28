@@ -5,7 +5,7 @@ const basketballTeams = [
   {
     name: "B.C. Maccabi Tel Aviv",
     league: "EuroLeague",
-    link: "https://www.thesportsdb.com/team/136065-maccabi-tel-aviv-bc",
+    link: "https://www.365scores.com/en-us/basketball/team/maccabi-tel-aviv-631/matches#fixtures",
     standingsLink: "https://www.google.com/search?q=Maccabi+Tel+Aviv+EuroLeague+standings",
     highlightsLink: [
       {
@@ -22,7 +22,7 @@ const basketballTeams = [
   {
     name: "Portland Trail Blazers",
     league: "NBA Western Conference",
-    link: "https://www.thesportsdb.com/team/134888-portland-trail-blazers",
+    link: "https://www.espn.com/nba/team/schedule/_/name/por/portland-trail-blazers",
     standingsLink: "https://www.google.com/search?q=Portland+Trail+Blazers+NBA+standings",
     highlightsLink: "https://www.youtube.com/results?search_query=Portland+Trail+Blazers+highlights",
     image: "/Portland Trail Blazers.png",
@@ -30,7 +30,7 @@ const basketballTeams = [
   {
     name: "Brooklyn Nets",
     league: "NBA Eastern Conference",
-    link: "https://www.thesportsdb.com/team/134861-brooklyn-nets",
+    link: "https://www.espn.com/nba/team/schedule/_/name/bkn",
     standingsLink: "https://www.google.com/search?q=Brooklyn+Nets+NBA+standings",
     highlightsLink: "https://www.youtube.com/results?search_query=Brooklyn+Nets+highlights",
     image: "/Brooklyn Nets.jpg",
@@ -38,7 +38,7 @@ const basketballTeams = [
   {
     name: "Dallas Mavericks",
     league: "NBA Western Conference",
-    link: "https://www.thesportsdb.com/team/134875-dallas-mavericks",
+    link: "https://www.espn.com/nba/team/schedule/_/name/dal/dallas-mavericks",
     standingsLink: "https://www.google.com/search?q=Dallas+Mavericks+NBA+standings",
     highlightsLink: "https://www.youtube.com/results?search_query=Dallas+Mavericks+highlights",
     image: "/Dallas Mavericks.jpg",

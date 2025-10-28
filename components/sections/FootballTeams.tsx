@@ -5,7 +5,7 @@ const footballTeams = [
   { 
     name: "Dallas Cowboys", 
     conference: "NFC East",
-    link: "https://www.thesportsdb.com/team/134934-dallas-cowboys",
+    link: "https://www.espn.com/nfl/team/schedule/_/name/dal/dallas-cowboys",
     standingsLink: "https://www.google.com/search?q=Dallas+Cowboys+NFL+standings",
     highlightsLink: "https://www.google.com/search?q=Dallas+Cowboys+last+week+match+highlights",
     image: "/Dallas Cowboys.png",
@@ -21,7 +21,7 @@ const footballTeams = [
   { 
     name: "NFL", 
     conference: "National Football League",
-    link: "https://www.thesportsdb.com/league/4391-nfl",
+    link: "https://www.espn.com/nfl/schedule",
     standingsLink: "https://www.nfl.com/standings/",
     highlightsLink: "https://www.google.com/search?q=nfl+games+highlights+today&rlz=1C1RXQR_enUS1126US1126&oq=nfl+games+hi&gs_lcrp=EgZjaHJvbWUqDAgBEAAYFBiHAhiABDIRCAAQABgUGEYY_QEYhwIYgAQyDAgBEAAYFBiHAhiABDIGCAIQRRg5MgcIAxAAGIAEMgcIBBAAGIAEMgwIBRAAGAoYsQMYgAQyDwgGEAAYChiDARixAxiABDIPCAcQABgKGIMBGLEDGIAEMgkICBAAGAoYgAQyCQgJEAAYChiABNIBCTExNDY0ajBqN6gCCLACAfEFis0BU8C7bI0&sourceid=chrome&ie=UTF-8#sie=lg;/g/11lyp42zk1;6;/m/059yj;mt;fp;1;;;",
     image: "/NFL.png",
