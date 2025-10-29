@@ -6,7 +6,7 @@ const soccerTeams = [
     name: "F.C. Maccabi Tel Aviv",
     country: "Israel",
     logo: "/F.C. Maccabi Tel Aviv.jpeg",
-    link: "https://www.espn.com/soccer/team/fixtures/_/id/524/maccabi-tel-aviv",
+    link: "https://www.foxsports.com/soccer/maccabi-tel-aviv-team-schedule",
     standingsLink: "https://www.google.com/search?q=Maccabi+Tel+Aviv+standings",
     highlightsLink: [
       {
@@ -47,7 +47,7 @@ const soccerTeams = [
     name: "UEFA Champions League",
     country: "Europe",
     logo: "/UEFA Champions League.jpg",
-    link: "https://www.espn.com/soccer/scoreboard?league=uefa.champions",
+    link: "https://www.espn.com/soccer/schedule/_/league/uefa.champions",
     standingsLink: "https://www.google.com/search?q=upcoming%20man%20champions%20league%20schedule%20&source=sh/x/gs/m2/5#sie=lg;/g/11lcj4vhs3;2;/m/0c1q0;st;fp;1;;;",
     highlightsLink: "https://www.youtube.com/results?search_query=chamption+leage+highlights+videos&sp=EgQIBBAB",
   },
