@@ -15,7 +15,7 @@ const soccerTeams = [
       },
       {
         label: "Israeli League Highlights",
-        url: "https://www.bing.com/videos/riverview/relatedvideo?q=%d7%9e%d7%9b%d7%91%d7%99+%d7%aa%d7%9c+%d7%90%d7%91%d7%99%d7%91+%d7%9b%d7%93%d7%95%d7%a8%d7%92%d7%9c+%d7%aa%d7%a7%d7%a6%d7%99%d7%a8&qs=n&sp=-1&ghc=1&lq=0&pq=%d7%9e%d7%9b%d7%91%d7%99+%d7%aa%d7%9c+%d7%90%d7%91%d7%99%d7%91+%d7%9b%d7%93%d7%95%d7%a8%d7%92%d7%9c+%d7%aa%d7%a7%d7%a6%d7%99%d7%a8&sc=7-25&sk=&cvid=D7C5CDA0550A445AAF910AFA91130A72&ajaxnorecss=1&sid=1D1B0FC7FF2F69901D5B1954FE3868A7&jsoncbid=0&ajaxsydconv=1&ru=%2fsearch%3fq%3d%25D7%259E%25D7%259B%25D7%2591%25D7%2599%2520%25D7%25AA%25D7%259C%2520%25D7%2590%25D7%2591%25D7%2599%25D7%2591%2520%25D7%259B%25D7%2593%25D7%2595%25D7%25A8%25D7%2592%25D7%259C%2520%25D7%25AA%25D7%25A7%25D7%25A6%25D7%2599%25D7%25A8%26qs%3dn%26form%3dQBRE%26sp%3d-1%26ghc%3d1%26lq%3d0%26pq%3d%25D7%259E%25D7%259B%25D7%2591%25D7%2599%2520%25D7%25AA%25D7%259C%2520%25D7%2590%25D7%2591%25D7%2599%25D7%2591%2520%25D7%259B%25D7%2593%25D7%2595%25D7%25A8%25D7%2592%25D7%259C%2520%25D7%25AA%25D7%25A7%25D7%25A6%25D7%2599%25D7%25A8%26sc%3d7-25%26sk%3d%26cvid%3dD7C5CDA0550A445AAF910AFA91130A72%26ajaxnorecss%3d1%26sid%3d1D1B0FC7FF2F69901D5B1954FE3868A7%26format%3dsnrjson%26jsoncbid%3d0%26ajaxsydconv%3d1&mmscn=vwrc&mid=F26310773311EEE5DD8CF26310773311EEE5DD8C&FORM=WRVORC&ntb=1&msockid=971cffb0b3c111f0bbeba2bec217aae8",
+        url: "https://www.google.com/search?q=%D7%9E%D7%9B%D7%91%D7%99+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%9B%D7%93%D7%95%D7%A8%D7%92%D7%9C+%D7%AA%D7%A7%D7%A6%D7%99%D7%A8%D7%99%D7%9D+%D7%9C%D7%99%D7%92%D7%AA+%D7%94%D7%A2%D7%9C+&sca_esv=4f246cde2838cb38&sxsrf=AE3TifNhWL9rqXh12PAaq3qG8LUC8BET_A%3A1762748588456&source=hp&ei=rGgRac6nGbbewN4P3c_Y0A0&iflsig=AOw8s4IAAAAAaRF2vIVE6C4MvMZ8XTZS7HL_cksngsV7&ved=0ahUKEwjOrcOb3uaQAxU2L9AFHd0nFtoQ4dUDCBo&uact=5&oq=%D7%9E%D7%9B%D7%91%D7%99+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%9B%D7%93%D7%95%D7%A8%D7%92%D7%9C+%D7%AA%D7%A7%D7%A6%D7%99%D7%A8%D7%99%D7%9D+%D7%9C%D7%99%D7%92%D7%AA+%D7%94%D7%A2%D7%9C+&gs_lp=Egdnd3Mtd2l6IkPXnteb15HXmSDXqtecINeQ15HXmdeRINeb15PXldeo15LXnCDXqten16bXmdeo15nXnSDXnNeZ15LXqiDXlNei15wgMgUQIRirAkiNggJQtRxYlfoBcAF4AJABAJgBrwSgAaIrqgEMMy4yOC4zLjIuMC4xuAEDyAEA-AEBmAImoALpL6gCCsICBxAjGCcY6gLCAg0QLhjRAxjHARgnGOoCwgIKECMY8AUYJxjqAsICDBAjGIAEGBMYJxiKBcICChAjGIAEGCcYigXCAgsQABiABBixAxiDAcICDhAuGIAEGLEDGIMBGNQCwgIEEC4YA8ICDhAuGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwHCAgQQABgDwgIFEAAYgATCAggQLhiABBjLAcICCBAAGIAEGMsBwgIGEAAYFhgewgIIEAAYFhgKGB7CAggQABiABBiiBMICBRAAGO8FwgIFECEYoAGYAzXxBfEl8oHjrHlwkgcKMS4zMS4zLjIuMaAH0uwCsgcKMC4zMS4zLjIuMbgHtC_CBwwwLjUuNC4yNi4yLjHIB78D&sclient=gws-wiz",
       },
     ],
   },
@@ -44,6 +44,14 @@ const soccerTeams = [
     highlightsLink: "https://www.youtube.com/results?search_query=La+Liga+highlights",
   },
   {
+    name: "FC Infer Miami",
+    country: "MLS",
+    logo: "/FC Infer Miami.jpg",
+    link: "https://www.espn.com/soccer/team/fixtures/_/id/20232/usa.inter_miami",
+    standingsLink: "https://www.google.com/search?q=inter+miami+cf+standings",
+    highlightsLink: "https://www.youtube.com/results?search_query=inter+miami+soccer+highlights ",
+  },
+  {
     name: "UEFA Champions League",
     country: "Europe",
     logo: "/UEFA Champions League.jpg",
@@ -52,7 +60,6 @@ const soccerTeams = [
     highlightsLink: "https://www.youtube.com/results?search_query=chamption+leage+highlights+videos&sp=EgQIBBAB",
   },
 ];
-
 export default function SoccerTeams() {
   return (
     <Section
