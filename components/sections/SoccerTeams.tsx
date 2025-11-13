@@ -60,6 +60,7 @@ const soccerTeams = [
     highlightsLink: "https://www.youtube.com/results?search_query=chamption+leage+highlights+videos&sp=EgQIBBAB",
   },
 ];
+
 export default function SoccerTeams() {
   return (
     <Section
@@ -86,4 +87,3 @@ export default function SoccerTeams() {
     </Section>
   );
 }
-
