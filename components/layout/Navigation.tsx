@@ -8,6 +8,7 @@ const navLinks = [
   { href: "#favorite-teams", label: "Teams" },
   { href: "#players", label: "Players" },
   { href: "#connect", label: "Connect" },
+  { href: "/calendar", label: "TV Calendar" },
 ];
 
 export default function Navigation() {
