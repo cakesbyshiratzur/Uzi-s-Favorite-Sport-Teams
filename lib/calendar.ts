@@ -206,8 +206,80 @@ const THESPORTSDB_API_BASE =
 const THESPORTSDB_LEAGUE_API_BASE =
   "https://www.thesportsdb.com/api/v1/json/3/eventsseason.php";
 
-function extractEspnBroadcasts(competition: any): string | undefined {
-  const broadcasts: any[] = competition?.broadcasts ?? [];
+// ESPN API types
+interface ESPNBroadcast {
+  medium?: { shortName?: string };
+  shortName?: string;
+  names?: string[];
+  market?: string;
+  channel?: string;
+}
+
+interface ESPNAddress {
+  city?: string;
+  state?: string;
+  country?: string;
+}
+
+interface ESPNVenue {
+  fullName?: string;
+  address?: ESPNAddress;
+}
+
+interface ESPNTeam {
+  displayName?: string;
+  shortDisplayName?: string;
+  abbreviation?: string;
+  id?: string | number;
+}
+
+interface ESPNCompetitor {
+  team?: ESPNTeam;
+  homeAway?: "home" | "away";
+}
+
+interface ESPNCompetition {
+  broadcasts?: ESPNBroadcast[];
+  venue?: ESPNVenue;
+  competitors?: ESPNCompetitor[];
+}
+
+interface ESPNEvent {
+  date?: string;
+  competitions?: ESPNCompetition[];
+}
+
+interface ESPNResponse {
+  events?: ESPNEvent[];
+}
+
+// TheSportsDB API types
+interface SportsDBEvent {
+  dateEvent?: string;
+  strTimestamp?: string;
+  dateEventLocal?: string;
+  strTime?: string;
+  strTimeLocal?: string;
+  strEvent?: string;
+  strHomeTeam?: string;
+  strAwayTeam?: string;
+  strVenue?: string;
+  strStadium?: string;
+  strLocation?: string;
+  strTVStation?: string;
+  strChannel?: string;
+  strLeague?: string;
+  strSport?: string;
+}
+
+interface SportsDBResponse {
+  events?: SportsDBEvent[];
+  results?: SportsDBEvent[];
+  eventsnext?: SportsDBEvent[];
+}
+
+function extractEspnBroadcasts(competition: ESPNCompetition | undefined): string | undefined {
+  const broadcasts: ESPNBroadcast[] = competition?.broadcasts ?? [];
   if (!broadcasts.length) return undefined;
 
   const uniqueNames = new Set<string>();
@@ -225,7 +297,7 @@ function extractEspnBroadcasts(competition: any): string | undefined {
   return Array.from(uniqueNames).join(" / ");
 }
 
-function extractEspnLocation(competition: any): string | undefined {
+function extractEspnLocation(competition: ESPNCompetition | undefined): string | undefined {
   const venueName = competition?.venue?.fullName;
   const city = competition?.venue?.address?.city;
   const state = competition?.venue?.address?.state;
@@ -243,7 +315,7 @@ function extractEspnLocation(competition: any): string | undefined {
 
 function buildMatchup(
   teamDisplayName: string,
-  competitors: any[]
+  competitors: ESPNCompetitor[]
 ): string | undefined {
   if (!competitors?.length) return undefined;
 
@@ -295,8 +367,8 @@ async function fetchFromEspn(
       return [];
     }
 
-    const data = await res.json();
-    const events: any[] = data.events ?? [];
+    const data = (await res.json()) as ESPNResponse;
+    const events: ESPNEvent[] = data.events ?? [];
     const now = new Date();
 
     return events
@@ -318,7 +390,7 @@ async function fetchFromEspn(
         const teamNameLower = config.teamName.toLowerCase();
         
         // Check if any competitor matches our team
-        const involvesTeam = competitors.some((c: any) => {
+        const involvesTeam = competitors.some((c: ESPNCompetitor) => {
           const competitorName = (c.team?.displayName || c.team?.shortDisplayName || "").toLowerCase();
           const competitorAbbr = (c.team?.abbreviation || "").toLowerCase();
           const competitorId = c.team?.id?.toString();
@@ -359,7 +431,7 @@ async function fetchFromEspn(
           matchup:
             matchup ??
             `${config.teamName} vs. ${competitors
-              ?.map((c: any) => c.team?.displayName)
+              ?.map((c: ESPNCompetitor) => c.team?.displayName)
               .join(" & ")}`,
           location: extractEspnLocation(competition),
           network: extractEspnBroadcasts(competition),
@@ -398,8 +470,8 @@ async function fetchFromEspnLeague(
       return [];
     }
 
-    const data = await res.json();
-    const events: any[] = data.events ?? [];
+    const data = (await res.json()) as ESPNResponse;
+    const events: ESPNEvent[] = data.events ?? [];
     const now = new Date();
 
     return events
@@ -423,7 +495,7 @@ async function fetchFromEspnLeague(
         // Build matchup from competitors
         const competitors = competition.competitors ?? [];
         const matchup = competitors
-          .map((c: any) => c.team?.displayName || c.team?.shortDisplayName)
+          .map((c: ESPNCompetitor) => c.team?.displayName || c.team?.shortDisplayName)
           .filter(Boolean)
           .join(" vs. ");
 
@@ -494,11 +566,11 @@ async function fetchFromSportsDB(
       return [];
     }
 
-    const data = await res.json();
+    const data = (await res.json()) as SportsDBResponse;
     
     // TheSportsDB API returns events in different formats
     // Check for events array or results array
-    let events: any[] = [];
+    let events: SportsDBEvent[] = [];
     if (Array.isArray(data.events)) {
       events = data.events;
     } else if (Array.isArray(data.results)) {

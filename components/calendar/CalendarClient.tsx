@@ -14,8 +14,6 @@ import {
   checkAlarms,
   type GameAlarm,
 } from "@/lib/alarms";
-import RefreshButton from "./RefreshButton";
-
 function getDayLabels(numDays = 7) {
   return Array.from({ length: numDays }, (_, i) => {
     const date = new Date();
@@ -36,14 +34,6 @@ interface CalendarClientProps {
   startOfWeek: string;
 }
 
-function getStartOfWeek(date: Date) {
-  const start = new Date(date);
-  const day = start.getDay();
-  const diff = start.getDate() - day + (day === 0 ? -6 : 1);
-  start.setDate(diff);
-  start.setHours(0, 0, 0, 0);
-  return start;
-}
 
 // Date formatters - must have consistent timezone to avoid hydration mismatches
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -66,7 +56,7 @@ type DailySchedule = {
 
 function groupEventsByDay(
   events: CalendarEvent[],
-  startOfWeek: Date
+  _startOfWeek: Date
 ): DailySchedule[] {
   const dayLabels = getDayLabels();
   const today = new Date();
@@ -112,13 +102,15 @@ export default function CalendarClient({
       startTime: new Date(event.startTime),
     }))
   );
-  const startOfWeek = new Date(startOfWeekStr);
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [sportFilter, setSportFilter] = useState<SportFilter>("all");
   const [dayFilter, setDayFilter] = useState<DayFilter>("all");
   const [alarms, setAlarms] = useState<GameAlarm[]>([]);
   const [showAlarmsList, setShowAlarmsList] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Memoize startOfWeek to avoid recreating on every render
+  const startOfWeek = useMemo(() => new Date(startOfWeekStr), [startOfWeekStr]);
 
   // Load alarms on mount
   useEffect(() => {
@@ -198,7 +190,7 @@ export default function CalendarClient({
       if (response.ok) {
         const data = await response.json();
         // Convert ISO strings back to Date objects
-        const eventsWithDates = data.events.map((event: any) => ({
+        const eventsWithDates = data.events.map((event: Omit<CalendarEvent, "startTime"> & { startTime: string }) => ({
           ...event,
           startTime: new Date(event.startTime),
         }));
