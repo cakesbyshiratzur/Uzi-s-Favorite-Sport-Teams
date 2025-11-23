@@ -1,5 +1,5 @@
-import Section from "../ui/Section";
-import PlayerCard from "../ui/PlayerCard";
+import Section from "./components/ui/Section";
+import PlayerCard from "./components/ui/PlayerCard";
 
 const players = [
   {
