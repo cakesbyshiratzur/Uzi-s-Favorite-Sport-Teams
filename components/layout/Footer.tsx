@@ -1,5 +1,7 @@
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  // Use UTC date to ensure consistent year across server and client
+  // This prevents hydration mismatches
+  const currentYear = new Date().getUTCFullYear();
 
   return (
     <footer className="bg-gray-900 text-white">
