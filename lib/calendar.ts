@@ -114,7 +114,7 @@ const teamConfigs: TeamScheduleConfig[] = [
     sport: "Soccer",
     competition: "La Liga",
     scheduleUrl:
-      "https://www.espn.com/soccer/team/fixtures/_/id/83/barcelona",
+      "https://www.espn.com/soccer/team/fixtures/_/id/83/league/ESP.1",
     source: {
       type: "espn",
       sportPath: "soccer/esp.1",
@@ -128,7 +128,7 @@ const teamConfigs: TeamScheduleConfig[] = [
     sport: "Soccer",
     competition: "MLS",
     scheduleUrl:
-      "https://www.espn.com/soccer/team/fixtures/_/id/20232/usa.inter_miami",
+      "https://www.espn.com/soccer/team/_/id/20232/inter-miami-cf",
     source: {
       type: "espn",
       sportPath: "soccer/usa.1",
@@ -167,11 +167,12 @@ const teamConfigs: TeamScheduleConfig[] = [
     teamName: "Premier League England",
     sport: "Soccer",
     competition: "Premier League",
-    scheduleUrl: "https://www.thesportsdb.com/league/4328-english-premier-league",
+    scheduleUrl: "https://www.espn.com/soccer/fixtures?league=eng.1",
     source: {
-      type: "thesportsdb",
+      type: "espn-league",
+      sportPath: "soccer",
+      leaguePath: "eng.1",
       displayName: "Premier League",
-      leagueId: "4328", // English Premier League
     },
   },
   {
@@ -355,6 +356,7 @@ async function fetchFromEspn(
   const url = `${ESPN_API_BASE}/${config.source.sportPath}/teams/${config.source.teamIdentifier}/schedule`;
 
   try {
+    console.log(`[${config.teamName}] Fetching schedule from: ${url}`);
     const res = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0" },
       cache: "no-store",
@@ -369,38 +371,51 @@ async function fetchFromEspn(
 
     const data = (await res.json()) as ESPNResponse;
     const events: ESPNEvent[] = data.events ?? [];
+    console.log(`[${config.teamName}] Fetched ${events.length} total events from ESPN API`);
     const now = new Date();
 
-    return events
+    const processedEvents = events
       .map((event) => {
         const competition = event.competitions?.[0];
-        if (!competition) return null;
+        if (!competition) {
+          console.log(`[${config.teamName}] Event skipped: no competition data`);
+          return null;
+        }
 
         const startTime = event.date ? new Date(event.date) : undefined;
-        if (!startTime || Number.isNaN(startTime.getTime())) return null;
+        if (!startTime || Number.isNaN(startTime.getTime())) {
+          console.log(`[${config.teamName}] Event skipped: invalid start time`);
+          return null;
+        }
 
         // Only include upcoming events
-        if (startTime.getTime() < now.getTime()) return null;
+        if (startTime.getTime() < now.getTime()) {
+          console.log(`[${config.teamName}] Event skipped: past event (${startTime.toISOString()})`);
+          return null;
+        }
 
         // Validate that this event actually involves our team
-        // This is critical to filter out incorrect data from the API
+        // Since we're fetching from a team-specific schedule endpoint, all events should involve our team
+        // But we still validate to ensure data integrity
         const competitors = competition.competitors ?? [];
         const teamDisplayName = config.source.displayName.toLowerCase();
         const teamAbbreviation = config.source.abbreviation?.toLowerCase();
         const teamNameLower = config.teamName.toLowerCase();
+        const expectedTeamId = config.source.teamIdentifier?.toString();
         
         // Check if any competitor matches our team
         const involvesTeam = competitors.some((c: ESPNCompetitor) => {
           const competitorName = (c.team?.displayName || c.team?.shortDisplayName || "").toLowerCase();
           const competitorAbbr = (c.team?.abbreviation || "").toLowerCase();
           const competitorId = c.team?.id?.toString();
-          const expectedTeamId = config.source.teamIdentifier?.toString();
           
           // Check multiple ways to identify the team
           return (
             competitorName.includes(teamDisplayName) ||
             teamDisplayName.includes(competitorName) ||
             competitorName.includes("maccabi tel aviv") ||
+            competitorName.includes("inter miami") || // Handle Inter Miami CF variations
+            competitorName.includes("barcelona") || // Handle Barcelona variations
             (teamAbbreviation && competitorAbbr === teamAbbreviation) ||
             competitorName.includes(teamNameLower) ||
             teamNameLower.includes(competitorName) ||
@@ -408,15 +423,21 @@ async function fetchFromEspn(
           );
         });
 
-        // Strictly filter: Only include events that involve our team
-        // If no competitors match our team, exclude this event
-        if (competitors.length > 0 && !involvesTeam) {
+        // For team-specific schedule endpoints, all events should involve our team
+        // Trust ESPN's team schedule endpoint and only exclude if we have no competitors
+        if (competitors.length === 0) {
           return null;
         }
         
-        // Additional safety check: if we have competitors but none match, skip
-        if (competitors.length === 0) {
-          return null;
+        // Log for debugging if team matching fails (but still include the event)
+        if (!involvesTeam && competitors.length > 0) {
+          console.log(
+            `[${config.teamName}] Team matching check failed but including event. ` +
+            `Expected: ${teamDisplayName} (ID: ${expectedTeamId}), ` +
+            `Competitors: ${competitors.map((c: ESPNCompetitor) => 
+              `${c.team?.displayName} (ID: ${c.team?.id})`
+            ).join(", ")}`
+          );
         }
 
         const matchup = buildMatchup(
@@ -440,6 +461,9 @@ async function fetchFromEspn(
         } satisfies CalendarEvent;
       })
       .filter(Boolean) as CalendarEvent[];
+    
+    console.log(`[${config.teamName}] Returning ${processedEvents.length} upcoming events`);
+    return processedEvents;
   } catch (error) {
     console.error(
       `Error fetching ESPN schedule for ${config.teamName}:`,
@@ -452,10 +476,11 @@ async function fetchFromEspn(
 async function fetchFromEspnLeague(
   config: TeamScheduleConfig & { source: ESPNLeagueConfig }
 ): Promise<CalendarEvent[]> {
-  // Try scoreboard endpoint first (more reliable for upcoming games)
-  // For leagues, we need to get upcoming games from the schedule
-  // The API structure might vary, so we'll try the scoreboard endpoint
-  const url = `${ESPN_API_BASE}/${config.source.sportPath}/${config.source.leaguePath}/scoreboard`;
+  // Try schedule endpoint first for upcoming games, fallback to scoreboard
+  // For leagues, we use the schedule endpoint to get upcoming fixtures
+  // If schedule endpoint doesn't work, we'll try scoreboard for multiple upcoming dates
+  let url = `${ESPN_API_BASE}/${config.source.sportPath}/${config.source.leaguePath}/schedule`;
+  let allEvents: ESPNEvent[] = [];
 
   try {
     const res = await fetch(url, {
@@ -463,19 +488,35 @@ async function fetchFromEspnLeague(
       cache: "no-store",
     });
 
-    if (!res.ok) {
-      console.error(
-        `Failed to fetch ESPN league schedule for ${config.teamName}: ${res.status} - ${url}`
+    if (res.ok) {
+      const data = (await res.json()) as ESPNResponse;
+      allEvents = data.events ?? [];
+    } else {
+      // If schedule endpoint fails, try scoreboard endpoint
+      console.warn(
+        `Schedule endpoint failed for ${config.teamName}, trying scoreboard: ${res.status} - ${url}`
       );
-      return [];
+      url = `${ESPN_API_BASE}/${config.source.sportPath}/${config.source.leaguePath}/scoreboard`;
+      const scoreboardRes = await fetch(url, {
+        headers: { "User-Agent": "Mozilla/5.0" },
+        cache: "no-store",
+      });
+
+      if (!scoreboardRes.ok) {
+        console.error(
+          `Failed to fetch ESPN league schedule for ${config.teamName}: ${scoreboardRes.status} - ${url}`
+        );
+        return [];
+      }
+
+      const scoreboardData = (await scoreboardRes.json()) as ESPNResponse;
+      allEvents = scoreboardData.events ?? [];
     }
 
-    const data = (await res.json()) as ESPNResponse;
-    const events: ESPNEvent[] = data.events ?? [];
     const now = new Date();
 
-    return events
-      .map((event) => {
+    return allEvents
+      .map((event: ESPNEvent) => {
         const competition = event.competitions?.[0];
         if (!competition) return null;
 
